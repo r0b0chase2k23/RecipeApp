@@ -9,47 +9,59 @@ import Foundation
 
 //  this swift file (call) is responsible for managing all the data fetching code of the app that fetches data from the json file and assigns it. by doinbg this it helps to keep orginaised and easier to maintain as more funtionality is added
 
-class DataServices {
- static   func getLocalData() -> [Recipe]{
-// here we get the file path for that json file to use to generate a file URL
+class DataService {
+    
+    static func getLocalData() -> [Recipe] {
+        
+        // Parse local json file
+        
+        // Get a url path to the json file
         let pathString = Bundle.main.path(forResource: "recipes", ofType: "json")
-// here we use a guard statment incase it returns nil
+        
+        // Check if pathString is not nil, otherwise...
         guard pathString != nil else {
             return [Recipe]()
         }
-// create a url object
+        
+        // Create a url object
         let url = URL(fileURLWithPath: pathString!)
-        do{
-           
-// create or more acurately try to create a data object
-         
+        
+        do {
+            // Create a data object
             let data = try Data(contentsOf: url)
-
-// decode the data with a JSON decoder
-      
-            let decoder = JSONDecoder()
-            do{
-        let recipeData = try decoder.decode([Recipe].self, from: data)
             
-// here we assign a uuid to each new instance of recipeData created in the array
+            // Decode the data with a JSON decoder
+            let decoder = JSONDecoder()
+            
+            do {
+                
+                let recipeData = try decoder.decode([Recipe].self, from: data)
+                
+                // Add the unique IDs
                 for r in recipeData {
                     r.id = UUID()
-// return the array of recipies with filled out blanks
+                    
+                    // Add unique IDs to recipe ingredients
+                    for i in r.ingredients {
+                        i.id = UUID()
+                    }
                 }
-return recipeData
+                
+                // Return the recipes
+                return recipeData
             }
-            catch{
-    // print error with parsing JSON
+            catch {
+                // error with parsing json
                 print(error)
             }
-            
         }
-        catch{
-          // Print Error with getting data to console
+        catch {
+            // error with getting data
             print(error)
         }
-// here we provide a catch all scenario if it fails to parse or retrive the data
-            return [Recipe]()
+        
+        return [Recipe]()
     }
-
+    
 }
+
