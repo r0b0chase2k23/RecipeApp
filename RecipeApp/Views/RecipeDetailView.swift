@@ -22,6 +22,7 @@ struct RecipeDetailView: View {
                 Image(recipe.image)
                     .resizable()
                     .scaledToFill()
+                    .cornerRadius(20)
                 
                 // MARK: Ingredients
                 VStack(alignment: .leading) {

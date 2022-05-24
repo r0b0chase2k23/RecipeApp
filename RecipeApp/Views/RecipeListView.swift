@@ -44,9 +44,8 @@ struct RecipeListView: View {
                             
                             
                         }
-                        .navigationBarHidden(true)
                     }
-                }
+                }.navigationBarHidden(true)
             }
         }.padding(.horizontal)
     }
