@@ -40,14 +40,11 @@ struct RecipeListView: View {
                                     }
                                     
                                 })
-                            
-                            
-                            
                         }
                     }
                 }.navigationBarHidden(true)
-            }
-        }.padding(.horizontal)
+            }.padding(.horizontal)
+        }
     }
 }
 
