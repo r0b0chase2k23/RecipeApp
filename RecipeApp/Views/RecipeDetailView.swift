@@ -25,6 +25,11 @@ struct RecipeDetailView: View {
                     .resizable()
                     .scaledToFill()
                     .cornerRadius(20)
+                // replacement title for feature card purpouse
+                Text(recipe.name)
+                    .bold()
+                    .padding(.top, 20)
+                    .font(.largeTitle)
                 // MARK: Serving Size Picker
                 VStack(alignment: .leading){
                 Text("Select your serving size: ")
@@ -67,7 +72,6 @@ struct RecipeDetailView: View {
                 }
             }
         }.padding(.horizontal)
-        .navigationBarTitle(recipe.name)
     }
 }
 

@@ -38,9 +38,9 @@ class RecipeModel: ObservableObject {
             if numerator >= denominator {
                 // calculate whole portion
                 wholePortions = numerator / denominator
-                // calculate remainer
+                // calculate remainder
                 numerator = numerator % denominator
-                // assign portion toi strings
+                // assign portion to string
                 portion += String(wholePortions)
             }
             // Express remainder as a fraction
