@@ -18,12 +18,12 @@ struct RecipeFeaturedView: View {
         VStack(alignment: .leading) {
             Text ("Featured Recipes")
                 .bold()
-                .font(.largeTitle)
+                .font(Font.custom("Avenir Heavy", size:32))
                 .padding(.leading)
                 .padding(.top, 40)
             GeometryReader { geo in
                 TabView (selection: $tabSelectionIndex){
-                    ForEach (0..<model.recipes.count) { index in
+                    ForEach (0..<model.recipes.count, id:\.self) { index in
                         if model.recipes[index].featured == true {
                           //Recipe Card
                             Button(action: {
@@ -40,7 +40,7 @@ struct RecipeFeaturedView: View {
                                             .aspectRatio(contentMode: .fill)
                                             .clipped()
                                         Text(model.recipes[index].name)
-                                            .font(.largeTitle)
+                                            .font(Font.custom("Avenir Heavy", size:28))
                                             .padding(5)
                                     }
                                 }
@@ -61,11 +61,13 @@ struct RecipeFeaturedView: View {
             }
             VStack(alignment: .leading, spacing: 10) {
                 Text("Preparation Time")
-                    .font(.headline)
+                    .font(Font.custom("Avenir Heavy", size:18))
                 Text(model.recipes[tabSelectionIndex].prepTime)
+                    .font(Font.custom("Avenir", size:18))
                 Text("Highlights")
-                    .font(.headline)
+                    .font(Font.custom("Avenir Heavy", size:18))
                 RecipeHighlights(highlights: model.recipes[tabSelectionIndex].highlights)
+                    .font(Font.custom("Avenir", size:18))
             }
             .padding([.leading, .bottom])
         }.onAppear(perform: {
@@ -74,7 +76,7 @@ struct RecipeFeaturedView: View {
     }
     func setFeaturedIndex() {
         // find index of first featured recipe
-      var index =  model.recipes.firstIndex {
+      let index =  model.recipes.firstIndex {
             (recipe) -> Bool in
             return recipe.featured
         }
